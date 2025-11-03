@@ -1,4 +1,6 @@
-# WIP
+# How to test
 
-- Change all to use uv 
-- Make more dynamic where to start the ipython etc.. (not only windows terminal but also zellij for example)
+```bash
+uv run -m helix_kernel.cli start --mux windows_terminal -p cmder
+uv run -m helix_kernel.cli exec a=1+1
+```

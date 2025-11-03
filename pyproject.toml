@@ -1,0 +1,17 @@
+[project]
+name = "helix-kernel"
+version = "0.1.0"
+description = "Helix integration tool for sending code to a Jupyter kernel."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "jupyter-client>=8.0",
+    "typer>=0.12.0",
+    "rich>=13.0",
+    "ipykernel>=7.1.0",
+    "jupyter-console>=6.6.3",
+    "euporie>=2.9.1",
+]
+
+[project.scripts]
+helix-kernel = "helix_kernel.cli:app"

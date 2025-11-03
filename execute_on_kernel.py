@@ -9,8 +9,6 @@ def send_code_to_kernel(code, connection_file):
     kc = BlockingKernelClient()
     kc.load_connection_file(connection_file)
     kc.start_channels()
-    print(type(code))
-    print(code)
     kc.execute(code)
     # we can also start a session, then we can add some parameters
     while True:
