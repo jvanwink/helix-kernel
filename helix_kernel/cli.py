@@ -1,3 +1,4 @@
+import sys
 from enum import Enum, auto, StrEnum
 import typer
 from pathlib import Path
@@ -35,7 +36,6 @@ def start(
     """Start a Jupyter kernel (and optionally open a console)."""
     km = KernelManager(project_dir)
     connection_file = km.start_kernel()
-    typer.echo(f"Kernel started: {connection_file}")
 
     match mux:
         case MultiplexerOption.NONE:
@@ -66,11 +66,14 @@ def start(
 
 @app.command()
 def exec(
-    code: str = typer.Argument(..., help="code to execute."),
+    code: str = typer.Argument(None , help="code to execute (if not piped)."),
     project_dir: Path = typer.Option(".", help="Project directory")
 ):
     """Execute a code snippet in the running kernel."""
     connection_file = Path(project_dir) / "jup_kernel.json"
+
+    if code is None or code == "-":
+        code = sys.stdin.read().strip()
     # code = code_file.read_text()
     execute_code(code, connection_file)
 

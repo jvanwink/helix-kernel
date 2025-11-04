@@ -1,0 +1,20 @@
+*/__pycache__/*
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# Virtual environments
+.env
+.venv
+venv/
+ENV/
+env/
+
+# macOS
+.DS_Store
+
+# Project-specific
+jup_kernel.json
+.python-version
