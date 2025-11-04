@@ -8,7 +8,7 @@ class KernelManager:
         self.project_dir = Path(project_dir)
         self.connection_file = self.project_dir / "jup_kernel.json"
         self.process = None
-
+        
     def start_kernel(self):
         """Start a Jupyter kernel in a uv-managed environment."""
         if self.connection_file.exists():
@@ -27,7 +27,7 @@ class KernelManager:
         )
         # Wait for connection file
         for _ in range(20):
-            if self.connection_file.exists():
+            if self.connection_file.resolve().exists():
                 return self.connection_file
             time.sleep(0.2)
 
