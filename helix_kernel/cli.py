@@ -1,5 +1,6 @@
 import sys
 from enum import Enum, auto, StrEnum
+import subprocess
 import typer
 from pathlib import Path
 from .kernel_manager import KernelManager
@@ -25,6 +26,20 @@ class MultiplexerOption(StrEnum):
 class InterfaceOption(StrEnum):
     JUPYTER =  auto()
     EUPORIE = auto()
+
+
+#TODO: lazygit --> Can be directly in helix
+#TODO: remove all breakpoints
+#TODO: Comment out all breakpoint
+#TODO: Helix key to set a breakpoint
+
+@app.command()
+def run(
+    python_file: Path = typer.Option("main.py", help="The python file to run"),
+    project_dir: Path = typer.Option(".", help="Project directory")
+):
+    #TODO: This should open a pane in the multiplexer
+    subprocess.Popen(["uv", "run", python_file], cwd=project_dir)    
 
 @app.command()
 def start(

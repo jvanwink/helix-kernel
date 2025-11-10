@@ -31,7 +31,7 @@ class NotebookInterface(Protocol):
 class WindowsTerminal(Multiplexer):
     def open(self, project_dir: Path, command: list[str], profile: str | None = None) -> None:
         args = [
-            "wt", "-w", "0", "sp", "-v", "-d", str(project_dir),
+            "wt", "-w", "0", "sp", "-V", "-d", str(project_dir),
         ]
         if profile:
             args += ["--profile", profile]
@@ -43,10 +43,9 @@ class Tmux(Multiplexer):
     def open(self, project_dir: Path, command: list[str], profile: str | None = None) -> None:
         subprocess.Popen(["tmux", "new-window"] + command, cwd=project_dir)
 
-#Not Tested
 class Zellij(Multiplexer):
     def open(self, project_dir: Path, command: list[str], profile: str | None = None) -> None:
-        subprocess.Popen(["zellij", "action", "new-tab", "--"] + command, cwd=project_dir)
+        subprocess.Popen(["zellij", "action", "new-pane", "--"] + command, cwd=project_dir)
 
 class JupyterConsole(NotebookInterface):
     def build_command(self, connection_file: Path) -> list[str]:
